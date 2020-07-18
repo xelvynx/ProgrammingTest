@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private int inventoryLimit = 2;
+    public List<Vegetable> inventory = new List<Vegetable>();
+
+    public void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddVegetable(Vegetable vege) 
     {
-        
+        if(inventory.Count < inventoryLimit) 
+        {
+            inventory.Add(vege);
+        }
+        else { return; }
     }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Vegetable") 
+        {
+            AddVegetable(other.GetComponent<Vegetable>());
+        }
+    }
+
 }

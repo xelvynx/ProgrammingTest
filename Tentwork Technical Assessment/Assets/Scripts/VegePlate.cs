@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class VegePlate : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<Vegetable> vegetablesOnPlate = new List<Vegetable>();
 
-    // Update is called once per frame
-    void Update()
+    public void AddToPlate(Vegetable vege) 
     {
-        
+        vegetablesOnPlate.Add(vege);
+
     }
 }

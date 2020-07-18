@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class CuttingBoard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool inUse = false;
+    public VegePlate vegePlate;
+    private float choppingTime;
+    public void Update()
     {
-        
-    }
+        if(choppingTime <= 0) 
+        {
 
-    // Update is called once per frame
-    void Update()
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collider)
     {
-        
+        if (!inUse)
+        {
+            if (collider.tag == "Player")
+            {
+                inUse = true;
+
+               // collider.GetComponent<Player>().inventory[0]
+            }
+        }
     }
 }
