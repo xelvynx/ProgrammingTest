@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
+    private float startingTime = 60;
+    private float player1Time;
+    private float player2Time;
+
+    public void Start()
+    {
+        
+    }
+
+    public void Update()
+    {
+        
+    }
 }
 /*
  * Things to Add
@@ -15,9 +27,11 @@ public class GameManager : MonoBehaviour
  *      Players
  * Players can hold 2 items at a time
  * First in first out for vegetables onto the chopping board
+ * Distinguish different controls for UP, DOWN, LEFT, RIGHT, ACTION{action will either pickup or discard based off of actions available)
  * 
  *      Vegetables
- *      
+ * Picked veges can be placed back on cutting board
+ * Show on UI what Items they are carrying. Inventory slot 1 = Vege1, Inventory slot 2 = Vege2
  * Veges can be grabbed from both tables on either side of map
  * Veges take time to chop, chops 1 vegetable at a time - player can't move during chopping
  * Once item is chopped, remove from inventory, put chopped veges on plate, After vegetable is chopped, you can THEN place another vege,
@@ -25,6 +39,10 @@ public class GameManager : MonoBehaviour
  * 
  * Combination/salad can be picked up after completed, and can be tossed in trashcan, but results in negative points
 
+ *      Chopping Board
+ *  Chopping board is where you go to get vegetables chopped
+ *  Once combination is deemed "Complete" then you can pick it up 
+ * 
  * 
  * Customer Interaction
  * Customers can request 1-3 ingredients

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
+    //Do you create a base player with the ability to move and change their controls within their own separate scripts? P1 vs P2 
+
     private int inventoryLimit = 2;
     public List<Vegetable> inventory = new List<Vegetable>();
 
