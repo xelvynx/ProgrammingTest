@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Vegetable
+  - CuttingBoard
   layers:
   - Default
   - TransparentFX

@@ -35,12 +35,47 @@ public class Player : MonoBehaviour
         
         inventory.RemoveAt(0);
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag == "Vegetable")
+        if (collision.tag == "Vegetable")
         {
-            AddToInventory(other.GetComponent<Vegetable>());
+            AddToInventory(collision.GetComponent<Vegetable>());
         }
+        if(collision.tag == "Customer") 
+        {
+            if (inventory.Count > 0)
+            {
+                VegePlate vege = CheckForPlate();
+                if (vege != null)
+                {
+                    collision.GetComponent<Customer>().CheckPlates(vege);
+                    inventory.Remove(vege);
+
+                }
+
+            }
+        }
+    }
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.tag == "CuttingBoard") 
+        {
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                AddToInventory(collision.GetComponent<VegePlate>());
+                collision.GetComponent<CuttingBoard>().ClearVegePlate();
+            }
+        }
+    }
+
+    public VegePlate CheckForPlate() 
+    {
+        foreach(Vegetable vege in inventory) 
+        {
+            if (vege.GetComponent<VegePlate>())
+                return (VegePlate)vege;
+        }
+        return null;
     }
 
 }

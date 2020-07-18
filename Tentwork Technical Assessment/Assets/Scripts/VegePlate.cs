@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class VegePlate : Vegetable,ILootable
+public class VegePlate : Vegetable
 {
     public List<Vegetable> vegetablesOnPlate = new List<Vegetable>();
 
@@ -19,4 +19,5 @@ public class VegePlate : Vegetable,ILootable
         }
         else { return; }
     }
+   
 }
