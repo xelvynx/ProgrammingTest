@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Vegetable : MonoBehaviour
+public class Vegetable : MonoBehaviour,ILootable
 {
-    [SerializeField]
-    private float cuttingDuration;
+    public float cuttingDuration { get; private set; }
     public VegetableType typeOfVegetable;
     private Text nameText;
     void Start()
@@ -16,8 +15,11 @@ public class Vegetable : MonoBehaviour
 
     public void ChangeVegetable() 
     {
-        gameObject.name = typeOfVegetable.ToString();
-        nameText.text = typeOfVegetable.ToString();
+        if (typeOfVegetable != VegetableType.Combo)
+        {
+            gameObject.name = typeOfVegetable.ToString();
+            nameText.text = typeOfVegetable.ToString();
+        }
         switch (typeOfVegetable) 
         {
             case VegetableType.Cucumber:

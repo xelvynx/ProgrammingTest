@@ -1,14 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class VegePlate : MonoBehaviour
+[System.Serializable]
+public class VegePlate : Vegetable,ILootable
 {
     public List<Vegetable> vegetablesOnPlate = new List<Vegetable>();
 
+    public void Start()
+    {
+        typeOfVegetable = VegetableType.Combo;
+    }
+
     public void AddToPlate(Vegetable vege) 
     {
-        vegetablesOnPlate.Add(vege);
-
+        if (vegetablesOnPlate.Count < 3)
+        {
+            vegetablesOnPlate.Add(vege);
+        }
+        else { return; }
     }
 }

@@ -1,1 +1,2 @@
-﻿public enum VegetableType { Cucumber, Onion, Tomato, Raddish, Lettuce, Spinach }
+﻿public enum VegetableType { Cucumber, Onion, Tomato, Raddish, Lettuce, Spinach, Combo }
+public enum CustomerMood { }
