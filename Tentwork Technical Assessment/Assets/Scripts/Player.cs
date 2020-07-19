@@ -5,11 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private bool canMove = true;
+    public int score;
     //Do you create a base player with the ability to move and change their controls within their own separate scripts? P1 vs P2 
     public int speed;
     private int inventoryLimit = 2;
     public List<Vegetable> inventory = new List<Vegetable>();
+    private VegePlate vegePlate;
     private Vector3 movement;
+    public void Start()
+    {
+        vegePlate = GetComponent<VegePlate>();
+    }
     public void Update()
     {
         if (canMove)
@@ -18,6 +24,7 @@ public class Player : MonoBehaviour
             transform.position += movement * Time.deltaTime * speed;
         }
     }
+    public void AddScore(int i) { score += i; }
     public void MovementControl() 
     {
         canMove = !canMove;
@@ -46,6 +53,7 @@ public class Player : MonoBehaviour
             if (inventory.Count > 0)
             {
                 VegePlate vege = CheckForPlate();
+                Debug.Log(vege);
                 if (vege != null)
                 {
                     collision.GetComponent<Customer>().CheckPlates(vege);
@@ -62,7 +70,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                AddToInventory(collision.GetComponent<VegePlate>());
+                foreach(Vegetable v in collision.GetComponent<VegePlate>().vegetablesOnPlate) 
+                {
+                    vegePlate.AddToPlate(v);
+                }
+                AddToInventory(vegePlate);
                 collision.GetComponent<CuttingBoard>().ClearVegePlate();
             }
         }
