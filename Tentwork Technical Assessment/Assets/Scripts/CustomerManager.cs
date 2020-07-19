@@ -9,9 +9,13 @@ public class CustomerManager : MonoBehaviour
     public GameObject[] customers;
     public Slider[] customerSliders;
     public int vegetableRequestCount = 3;
+    public float delayBeforeCustomerSpawn = 5;
+    public int activeCustomers = 0;
+    private bool coroutineRunning;
     public void Start()
     {
-        ActivateCustomer();
+        Customer.CustomerLeave += DecrementCustomerAmount;
+        StartCoroutine("GenerateCustomer");
     }
 
     public void ActivateCustomer() 
@@ -23,9 +27,11 @@ public class CustomerManager : MonoBehaviour
                 customerSliders[i].gameObject.SetActive(true);
                 customers[i].SetActive(true);
                 GeneratePlate(customers[i].GetComponent<Customer>());
+                activeCustomers++;
                 return;
             }
         }
+        coroutineRunning = false; //When it activates all the customers, it will switch off which means coroutine is not running anymore
         return;
     }
 
@@ -35,6 +41,20 @@ public class CustomerManager : MonoBehaviour
         {
             customer.plateRequest.Add(vegetables[Random.Range(0, vegetables.Length)]);
         }
+    }
+    IEnumerator GenerateCustomer() 
+    {
+        while (activeCustomers < 5)
+        {
+            coroutineRunning = true;
+            ActivateCustomer();
+            yield return new WaitForSeconds(delayBeforeCustomerSpawn);
+        }
+    }
+    public void DecrementCustomerAmount() 
+    { 
+        activeCustomers--;
+        if (!coroutineRunning) StartCoroutine("GenerateCustomer");
     }
 
 }

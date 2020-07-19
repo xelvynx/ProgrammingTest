@@ -2,20 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
+    public GameObject player1;
+    public GameObject player2;
     private float startingTime = 60;
     private float player1Time;
     private float player2Time;
-
+    private int player1Score;
+    private int player2Score;
     public void Start()
     {
-        
+
     }
 
     public void Update()
     {
         
+    }
+    public void GivePoints(CustomerMood mood,int addScore) 
+    {
+        switch (mood)
+        {
+            case CustomerMood.Happy:
+                //Award one person
+                break;
+            case CustomerMood.Satisfied:
+                //Award One Person
+                break;
+            case CustomerMood.Angry:
+                //Deduct people who participated
+                break;
+            case CustomerMood.Dissatisfied:
+                //Deduct both
+                break;
+        }
+    }
+    public void Deduct(Player[] player,int score) 
+    {
+        for(int i = 0; i < player.Length; i++) 
+        {
+            player[i].AddScore(score);
+        }
     }
 }
 /*

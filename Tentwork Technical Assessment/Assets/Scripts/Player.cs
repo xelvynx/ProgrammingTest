@@ -53,10 +53,9 @@ public class Player : MonoBehaviour
             if (inventory.Count > 0)
             {
                 VegePlate vege = CheckForPlate();
-                Debug.Log(vege);
                 if (vege != null)
                 {
-                    collision.GetComponent<Customer>().CheckPlates(vege);
+                    collision.GetComponent<Customer>().CheckPlates(vege,this);
                     inventory.Remove(vege);
 
                 }
@@ -70,10 +69,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                foreach(Vegetable v in collision.GetComponent<VegePlate>().vegetablesOnPlate) 
-                {
-                    vegePlate.AddToPlate(v);
-                }
+                vegePlate.vegetablesOnPlate = new List<Vegetable>(collision.GetComponent<VegePlate>().vegetablesOnPlate);
                 AddToInventory(vegePlate);
                 collision.GetComponent<CuttingBoard>().ClearVegePlate();
             }
@@ -99,9 +95,9 @@ public class Player : MonoBehaviour
             }
         }
     }
-
     public VegePlate CheckForPlate() 
     {
+
         foreach(Vegetable vege in inventory) 
         {
             if (vege.GetComponent<VegePlate>())
@@ -109,5 +105,4 @@ public class Player : MonoBehaviour
         }
         return null;
     }
-
 }
