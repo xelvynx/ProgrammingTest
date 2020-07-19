@@ -9,14 +9,12 @@ public class Customer : MonoBehaviour
     public List<Vegetable> plateRequest = new List<Vegetable>();
     public List<Player> playersWhoInteracted = new List<Player>();
     public CustomerMood mood;
-    public Slider slider;
     private float secondsPerIngredient = 100;
     private float customerPatience;
     public float currentPatience;
     private int scoreAddition = 100;
     public int correctNumberOfIngredients;
     private float moodMultiplier = 1;
-    
     //Dissatisfied Customer waits until currentPatience hits 0.  When 0 hits, both players will lose points
     //Angry Customer - comes from being given incorrect orders. will lose patience a bit faster, person or people who provided incorrect order will lose double points
     //Happy customer - given dish with 70% remaining. Awards player with powerup bonus
@@ -24,23 +22,26 @@ public class Customer : MonoBehaviour
     #endregion
     void Start()
     {
-        CustomerLeave += DeactivateCustomer;
         mood = CustomerMood.Satisfied;
         customerPatience = plateRequest.Count * secondsPerIngredient;
-        slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 40;
         currentPatience = customerPatience;
+
     }
     private void Update()
     {
         currentPatience -= Time.deltaTime*moodMultiplier;
-        slider.value = currentPatience / customerPatience;
-        if(currentPatience <= 0)
+        patienceRatio();
+        if (currentPatience <= 0)
         {
             if(mood!= CustomerMood.Angry)
             ChangeMood(CustomerMood.Dissatisfied);//Customer mood changed to dissatisfied
         }
     }
     #region Methods
+    public float patienceRatio() 
+    {
+        return currentPatience / customerPatience;
+    }
     public void CheckPlates(VegePlate vegePlate,Player player)
     {
         AddPlayer(player);
@@ -56,7 +57,7 @@ public class Customer : MonoBehaviour
         }
 
         //Part2 decides what mood the customer will be in
-        if(correctNumberOfIngredients>= 3) 
+        if(correctNumberOfIngredients>= plateRequest.Count) 
         {
             float happinessCheck = currentPatience / customerPatience;
             if (happinessCheck > .70f) // Checks to see if 
@@ -67,15 +68,14 @@ public class Customer : MonoBehaviour
             else 
                 ChangeMood(CustomerMood.Satisfied);//Customer mood changed to satisfied
             correctNumberOfIngredients = 0;
-            Debug.Log("Right");
             CheckResult(player, scoreAddition);
-            DeactivateCustomer();//static event
-
+            DeactivateCustomer();
         }
         else 
         { 
             correctNumberOfIngredients = 0;
             ChangeMood(CustomerMood.Angry);//Customer mood changed to angry
+            moodMultiplier=  1.2f;
             Debug.Log("Wrong"); 
         }
     }
@@ -102,7 +102,7 @@ public class Customer : MonoBehaviour
     }
     private void DeactivateCustomer()
     {
-        this.slider.gameObject.SetActive(false);
+        //this.slider.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
     }
     public void ChangeMood(CustomerMood customerMood) 

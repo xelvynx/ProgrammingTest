@@ -69,7 +69,11 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E)) 
             {
-                vegePlate.vegetablesOnPlate = new List<Vegetable>(collision.GetComponent<VegePlate>().vegetablesOnPlate);
+                VegePlate choppingBoardVeges = collision.GetComponent<CuttingBoard>().vegePlate;
+                for (int i = 0; i< choppingBoardVeges.vegetablesOnPlate.Count; i++) 
+                {
+                    vegePlate.vegetablesOnPlate.Add(choppingBoardVeges.vegetablesOnPlate[i]);
+                }
                 AddToInventory(vegePlate);
                 collision.GetComponent<CuttingBoard>().ClearVegePlate();
             }

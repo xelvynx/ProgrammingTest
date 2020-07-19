@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject player1;
-    public GameObject player2;
+    public static event OnCustomerLeave CustomerLeft;
+    public Player player1;
+    public Player player2;
     private float startingTime = 60;
     private float player1Time;
     private float player2Time;
@@ -20,30 +21,27 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
-    public void GivePoints(CustomerMood mood,int addScore) 
+    public void GivePoints(Player player,int addScore) 
     {
-        switch (mood)
+        if(player.name == "Player1") 
         {
-            case CustomerMood.Happy:
-                //Award one person
-                break;
-            case CustomerMood.Satisfied:
-                //Award One Person
-                break;
-            case CustomerMood.Angry:
-                //Deduct people who participated
-                break;
-            case CustomerMood.Dissatisfied:
-                //Deduct both
-                break;
+            player1.score += addScore;
+            player1Score = player1.score;
+            //Add Time
+        }
+        else
+        {
+            player2.score += addScore;
+            player2Score = player2.score;
         }
     }
-    public void Deduct(Player[] player,int score) 
+
+    public void ScoreChange() 
     {
-        for(int i = 0; i < player.Length; i++) 
-        {
-            player[i].AddScore(score);
-        }
+        //Update score on player class
+        //Then have player class update game manager
+        //when Game manager is updated, update UI
+        //Update UI Manager of new scores
     }
 }
 /*
