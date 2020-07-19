@@ -69,7 +69,7 @@ public class Customer : MonoBehaviour
             correctNumberOfIngredients = 0;
             Debug.Log("Right");
             CheckResult(player, scoreAddition);
-            CustomerLeave();//static event
+            DeactivateCustomer();//static event
 
         }
         else 
