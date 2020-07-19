@@ -5,15 +5,13 @@ using UnityEngine.UI;
 public class Customer : MonoBehaviour
 {
     public List<Vegetable> plateRequest = new List<Vegetable>();
-    public Transform customerLocation;
-    private Slider slider;
+    public Slider slider;
     private float customerPatience;
     // Start is called before the first frame update
     void Start()
     {
-
-
         slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 50;
+        //plateRequest.Add(gameObject.AddComponent(Type.GetType("ScriptName"));
     }
     private void Update()
     {

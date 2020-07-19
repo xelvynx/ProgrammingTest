@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         }
         else { return; }
     }
+    public void ReturnVegetable() { }
     public void RemoveVegetable() 
     {
         inventory.RemoveAt(0);
@@ -74,6 +75,15 @@ public class Player : MonoBehaviour
                     collision.GetComponent<Vegetable>().GetVegetable(inventory[0]);
                     RemoveVegetable();
                 }
+            }
+        }
+        if(collision.tag == "Vegetable") 
+        {
+            if (Input.GetKeyDown(KeyCode.E)) 
+            {
+                VegetableType vtype = collision.GetComponent<Vegetable>().typeOfVegetable;
+                Vegetable vege = inventory.Find(s => s.typeOfVegetable == vtype);
+                inventory.Remove(vege);
             }
         }
     }
