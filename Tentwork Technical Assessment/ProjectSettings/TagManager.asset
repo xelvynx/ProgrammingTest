@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Vegetable
   - CuttingBoard
+  - Customer
+  - Plate
   layers:
   - Default
   - TransparentFX

@@ -11,11 +11,10 @@ public class CuttingBoard : MonoBehaviour
     public void Start()
     {
         vegePlate = GetComponent<VegePlate>();
-        veggieText = GetComponentInChildren<Text>();
     }
     public void OnTriggerEnter2D(Collider2D collider)
     {
-        if (!inUse)
+        if (!inUse && vegePlate.vegetablesOnPlate.Count<3)
         {
             if (collider.tag == "Player")
             {
@@ -39,6 +38,7 @@ public class CuttingBoard : MonoBehaviour
     public void ClearVegePlate()
     {
         vegePlate.vegetablesOnPlate.Clear();
+        veggieText.text = "";
     }
     public void AddText()
     {

@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
     }
     public void RemoveVegetable() 
     {
-        
         inventory.RemoveAt(0);
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -64,6 +63,17 @@ public class Player : MonoBehaviour
             {
                 AddToInventory(collision.GetComponent<VegePlate>());
                 collision.GetComponent<CuttingBoard>().ClearVegePlate();
+            }
+        }
+        if(collision.tag == "Plate") 
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (inventory.Count > 0)
+                {
+                    collision.GetComponent<Vegetable>().GetVegetable(inventory[0]);
+                    RemoveVegetable();
+                }
             }
         }
     }

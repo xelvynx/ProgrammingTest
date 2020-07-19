@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Vegetable : MonoBehaviour,ILootable
+public class Vegetable : MonoBehaviour
 {
     public float cuttingDuration { get; private set; }
     public VegetableType typeOfVegetable;
-    private Text nameText;
+    public Text nameText;
     void Start()
     {
-        nameText= GetComponentInChildren<Text>();
         ChangeVegetable();
     }
 
+    public void GetVegetable(Vegetable vege) 
+    {
+        typeOfVegetable = vege.typeOfVegetable;
+        ChangeVegetable();
+    }
     public void ChangeVegetable() 
     {
         if (typeOfVegetable != VegetableType.Combo)
@@ -39,6 +43,10 @@ public class Vegetable : MonoBehaviour,ILootable
                 break;
             case VegetableType.Spinach:
                 cuttingDuration = .5f;
+                break;
+            case VegetableType.None:
+                cuttingDuration = 0;
+                nameText.text = "";
                 break;
             default:
                 break;
