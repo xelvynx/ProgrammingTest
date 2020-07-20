@@ -8,6 +8,7 @@ TagManager:
   - CuttingBoard
   - Customer
   - Plate
+  - Trash
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Interactable
   - 
   - 
   - 

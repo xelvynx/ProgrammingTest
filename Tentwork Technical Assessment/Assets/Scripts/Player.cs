@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private bool canMove = true;
-    public int score;
-    //Do you create a base player with the ability to move and change their controls within their own separate scripts? P1 vs P2 
+    private int score;
+    public int Score { get { return score; }  set { score = value; } }
     public int speed;
     private int inventoryLimit = 2;
     public List<Vegetable> inventory = new List<Vegetable>();
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
         }
     }
     public void AddScore(int i) { score += i; }
+    public int GetScore() { return score; }
     public void MovementControl() 
     {
         canMove = !canMove;
@@ -37,7 +38,6 @@ public class Player : MonoBehaviour
         }
         else { return; }
     }
-    public void ReturnVegetable() { }
     public void RemoveVegetable() 
     {
         inventory.RemoveAt(0);
@@ -45,59 +45,31 @@ public class Player : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Vegetable")
-        {
+        {   
             AddToInventory(collision.GetComponent<Vegetable>());
         }
         if(collision.tag == "Customer") 
         {
             if (inventory.Count > 0)
             {
-                VegePlate vege = CheckForPlate();
+                VegePlate vege = CheckForPlate();//returns vege plate 
                 if (vege != null)
                 {
                     collision.GetComponent<Customer>().CheckPlates(vege,this);
-                    inventory.Remove(vege);
-
+                    inventory.Remove(vege);//removes vege plate
+                    vegePlate.vegetablesOnPlate.Clear();
                 }
 
             }
         }
     }
-    public void OnTriggerStay2D(Collider2D collision)
+    public void AddToVegePlate(VegePlate choppingBoardPlate) 
     {
-        if(collision.tag == "CuttingBoard") 
+        for (int i = 0; i < choppingBoardPlate.vegetablesOnPlate.Count; i++)
         {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                VegePlate choppingBoardVeges = collision.GetComponent<CuttingBoard>().vegePlate;
-                for (int i = 0; i< choppingBoardVeges.vegetablesOnPlate.Count; i++) 
-                {
-                    vegePlate.vegetablesOnPlate.Add(choppingBoardVeges.vegetablesOnPlate[i]);
-                }
-                AddToInventory(vegePlate);
-                collision.GetComponent<CuttingBoard>().ClearVegePlate();
-            }
+            vegePlate.vegetablesOnPlate.Add(choppingBoardPlate.vegetablesOnPlate[i]);
         }
-        if(collision.tag == "Plate") 
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                if (inventory.Count > 0)
-                {
-                    collision.GetComponent<Vegetable>().GetVegetable(inventory[0]);
-                    RemoveVegetable();
-                }
-            }
-        }
-        if(collision.tag == "Vegetable") 
-        {
-            if (Input.GetKeyDown(KeyCode.E)) 
-            {
-                VegetableType vtype = collision.GetComponent<Vegetable>().typeOfVegetable;
-                Vegetable vege = inventory.Find(s => s.typeOfVegetable == vtype);
-                inventory.Remove(vege);
-            }
-        }
+        AddToInventory(vegePlate);
     }
     public VegePlate CheckForPlate() 
     {
@@ -105,8 +77,19 @@ public class Player : MonoBehaviour
         foreach(Vegetable vege in inventory) 
         {
             if (vege.GetComponent<VegePlate>())
+            {
+                Debug.Log("Returned a vege plate");
                 return (VegePlate)vege;
+            }
         }
+        Debug.Log("Returned nothing");
         return null;
+    }
+
+    public void RemoveVegePlate() 
+    {
+        VegePlate vegPlate = CheckForPlate();
+        inventory.Remove(vegPlate);
+        vegePlate.vegetablesOnPlate.Clear();
     }
 }

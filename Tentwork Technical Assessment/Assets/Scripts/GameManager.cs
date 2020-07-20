@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static event OnCustomerLeave CustomerLeft;
     public Player player1;
     public Player player2;
     private float startingTime = 60;
@@ -12,29 +11,68 @@ public class GameManager : Singleton<GameManager>
     private float player2Time;
     private int player1Score;
     private int player2Score;
+
+    //Things to add
+    //Text displaying character inventory - not yet started
+    //Timer - not yet started
+    //POwerup spawning within a certain area- not yet started
+    //individual controls - not yet started
+    //Distinguishing cutting boards for player who used first - not yet started
+    //Game finishes when both timers hit 0 - not yet started
+    //Top 10 scoreboard - not yet started
+    //Reset option on endgame screen - not yet started
+    //Fix customer slider + text location for adjustable - not yet started
+    //Change player score based off throwing away in trashcan - not yet started
+    //consolidated code - in progress
+    //using trash can removes ingredients in vege plate
+    //if player gives combination more than what they requested, make it wrong - not yet started
+    //if player runs to chopping board when 3 ingredients are already on there, pickup? do nothing? - not yet started
+    //add flourishes including changing cutting board color of the player who used it.  player opacity changes from clear to solid color when cutting on board
+    //turn customer red if angry and reset slider bar
+    //Resolved - Issue currently happening with on reactivate, customer quickly disappears due to currentpatience being reduced too quickly and ends up going negative, current patience not resetting when reactivated
+    //Answer - moved the NewSpawn(resets timer and slider ratio back to 1) to after plate is generated
     public void Start()
     {
-
+        player1Time = startingTime;
     }
 
     public void Update()
     {
-        
+        UpdateTimers();
     }
-    public void GivePoints(Player player,int addScore) 
+    public void UpdateTimers() 
     {
-        if(player.name == "Player1") 
+        player1Time -= Time.deltaTime;
+        UIManager.Instance.UpdatePlayer1Timer(player1Time);
+    }
+    public void PointDistribution(Player player, int score)
+    {
+        player.Score += score;
+        if (player.name == "Player1")
         {
-            player1.score += addScore;
-            player1Score = player1.score;
+            player1Score = player1.GetScore();
+            UIManager.Instance.UpdatePlayer1Score(player1Score);
             //Add Time
         }
         else
         {
-            player2.score += addScore;
-            player2Score = player2.score;
+            player2Score = player2.GetScore();
         }
     }
+    public void PointDistribution(int score) 
+    {
+        PointDistribution(player1, score);
+        PointDistribution(player2, score);
+    }
+   
+    public void PointDistribution(Player[] players, int score)
+    {
+        foreach(Player player in players) 
+        {
+            PointDistribution(player, score);
+        }
+    }
+    
 
     public void ScoreChange() 
     {

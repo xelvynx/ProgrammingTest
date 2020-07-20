@@ -16,13 +16,12 @@ public class CustomerUI : MonoBehaviour
     {
         slider.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.up * 30;
         text.transform.position = Camera.main.WorldToScreenPoint(transform.position) + Vector3.down * 45;
- 
     }
 
     // Update is called once per frame
     void Update()
     {
-        slider.value = customer.patienceRatio();
+        slider.value = customer.PatienceRatio();
     }
     public void AddText(int i)
     {

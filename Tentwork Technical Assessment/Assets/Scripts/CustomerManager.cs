@@ -46,6 +46,7 @@ public class CustomerManager : MonoBehaviour
         {
             customer.plateRequest.Add(vegetables[Random.Range(0, vegetables.Length)]);
         }
+        customer.NewSpawn();
         customer.GetComponent<CustomerUI>().AddText(customer.plateRequest.Count);
     }
     IEnumerator GenerateCustomer() 

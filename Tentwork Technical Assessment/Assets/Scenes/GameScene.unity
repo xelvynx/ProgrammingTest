@@ -255,6 +255,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Plate
       objectReference: {fileID: 0}
+    - target: {fileID: 6135422895140388536, guid: ace8441a816992148ab84390bb7ce1e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6135422895140388519, guid: ace8441a816992148ab84390bb7ce1e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -315,6 +320,11 @@ PrefabInstance:
       propertyPath: nameText
       value: 
       objectReference: {fileID: 2088516612}
+    - target: {fileID: 6135422894117950415, guid: ace8441a816992148ab84390bb7ce1e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ace8441a816992148ab84390bb7ce1e8, type: 3}
@@ -329,6 +339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: R.Vegetable (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7401400078563774190, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 48232688452983758, guid: 6a849d7f7409a624683bae0d33232c73,
         type: 3}
@@ -394,6 +409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: typeOfVegetable
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167458780546132323, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a849d7f7409a624683bae0d33232c73, type: 3}
@@ -500,6 +520,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: L.Vegetable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7257884782301449923, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 190693484344138723, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -565,6 +590,11 @@ PrefabInstance:
       propertyPath: typeOfVegetable
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5023942992964217166, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fbce3f5020376a4d8ec175c8fddd35e, type: 3}
 --- !u!1 &277444554
@@ -628,6 +658,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right CuttingBoard
       objectReference: {fileID: 0}
+    - target: {fileID: 9177372159992829862, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9177372159992829866, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -688,6 +723,11 @@ PrefabInstance:
       propertyPath: veggieText
       value: 
       objectReference: {fileID: 743174403}
+    - target: {fileID: 9177372159879662838, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2fa8a66ad991e43a3ac159b96cb68a, type: 3}
 --- !u!1 &399320865 stripped
@@ -2810,7 +2850,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5e3c219b3986643bafc0a41f22315d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   speed: 5
   inventory: []
 --- !u!4 &1294291932
@@ -3070,6 +3109,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: L.Vegetable (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7257884782301449923, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 190693484344138723, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3134,6 +3178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: typeOfVegetable
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5023942992964217166, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fbce3f5020376a4d8ec175c8fddd35e, type: 3}
@@ -3712,6 +3761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: R.Vegetable (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7401400078563774190, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 48232688452983758, guid: 6a849d7f7409a624683bae0d33232c73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3776,6 +3830,11 @@ PrefabInstance:
         type: 3}
       propertyPath: typeOfVegetable
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167458780546132323, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a849d7f7409a624683bae0d33232c73, type: 3}
@@ -3939,6 +3998,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1928189251}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1923598521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1923598522}
+  - component: {fileID: 1923598523}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1923598522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923598521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2054254582}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923598523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923598521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7942741b0a9dd0c4c8686a5b3c465e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1ScoreText: {fileID: 600058532}
+  player1TimerText: {fileID: 1166911571}
 --- !u!1001 &1928189251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4508,6 +4612,7 @@ Transform:
   m_Children:
   - {fileID: 1448251272}
   - {fileID: 905709524}
+  - {fileID: 1923598522}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4677,6 +4782,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: R.Vegetable
       objectReference: {fileID: 0}
+    - target: {fileID: 7401400078563774190, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 48232688452983758, guid: 6a849d7f7409a624683bae0d33232c73,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4742,6 +4852,11 @@ PrefabInstance:
       propertyPath: typeOfVegetable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5167458780546132323, guid: 6a849d7f7409a624683bae0d33232c73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a849d7f7409a624683bae0d33232c73, type: 3}
 --- !u!114 &2987520831345139018 stripped
@@ -4767,6 +4882,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trashcan
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199388701543052536, guid: 89fbbd11878ed71489823cfdfb93f378,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199388701543052536, guid: 89fbbd11878ed71489823cfdfb93f378,
+        type: 3}
+      propertyPath: m_TagString
+      value: Trash
       objectReference: {fileID: 0}
     - target: {fileID: 8252716753775724078, guid: 89fbbd11878ed71489823cfdfb93f378,
         type: 3}
@@ -4822,6 +4947,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549612881211547946, guid: 89fbbd11878ed71489823cfdfb93f378,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89fbbd11878ed71489823cfdfb93f378, type: 3}
@@ -4892,13 +5022,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5173891962373414103, guid: 5685229b6caf33e428d4e5d95099a1be,
+    - target: {fileID: 5919762519547321656, guid: 5685229b6caf33e428d4e5d95099a1be,
         type: 3}
-      propertyPath: m_Constraints
-      value: 4
+      propertyPath: checkableLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5173891962373414121, guid: 5685229b6caf33e428d4e5d95099a1be, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5685229b6caf33e428d4e5d95099a1be, type: 3}
 --- !u!1001 &5606103711242949515
 PrefabInstance:
@@ -4911,6 +5040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: L.Vegetable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7257884782301449923, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 190693484344138723, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
         type: 3}
@@ -4972,6 +5106,11 @@ PrefabInstance:
       propertyPath: nameText
       value: 
       objectReference: {fileID: 2001586010}
+    - target: {fileID: 5023942992964217166, guid: 1fbce3f5020376a4d8ec175c8fddd35e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fbce3f5020376a4d8ec175c8fddd35e, type: 3}
 --- !u!4 &5722275405335021672 stripped
@@ -5171,6 +5310,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left Plate
       objectReference: {fileID: 0}
+    - target: {fileID: 6135422895140388536, guid: ace8441a816992148ab84390bb7ce1e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6135422895140388519, guid: ace8441a816992148ab84390bb7ce1e8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5231,6 +5375,11 @@ PrefabInstance:
       propertyPath: nameText
       value: 
       objectReference: {fileID: 2088516612}
+    - target: {fileID: 6135422894117950415, guid: ace8441a816992148ab84390bb7ce1e8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ace8441a816992148ab84390bb7ce1e8, type: 3}
@@ -5311,6 +5460,21 @@ PrefabInstance:
       propertyPath: slider
       value: 
       objectReference: {fileID: 547618797}
+    - target: {fileID: 8130685432747692463, guid: 7d0d2406b82e10d45bb73202fc056377,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130685432747692463, guid: 7d0d2406b82e10d45bb73202fc056377,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130685432747692463, guid: 7d0d2406b82e10d45bb73202fc056377,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1748914901362202584, guid: 7d0d2406b82e10d45bb73202fc056377,
         type: 3}
       propertyPath: slider
@@ -5334,6 +5498,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Left CuttingBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177372159992829862, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 9177372159992829866, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
         type: 3}
@@ -5395,5 +5564,10 @@ PrefabInstance:
       propertyPath: veggieText
       value: 
       objectReference: {fileID: 972111447}
+    - target: {fileID: 9177372159879662838, guid: 1a2fa8a66ad991e43a3ac159b96cb68a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a2fa8a66ad991e43a3ac159b96cb68a, type: 3}

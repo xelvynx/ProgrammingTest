@@ -15,38 +15,51 @@ public class Customer : MonoBehaviour
     private int scoreAddition = 100;
     public int correctNumberOfIngredients;
     private float moodMultiplier = 1;
+
+    private SpriteRenderer spriteRenderer;
     //Dissatisfied Customer waits until currentPatience hits 0.  When 0 hits, both players will lose points
     //Angry Customer - comes from being given incorrect orders. will lose patience a bit faster, person or people who provided incorrect order will lose double points
     //Happy customer - given dish with 70% remaining. Awards player with powerup bonus
 
     #endregion
-    void Start()
+    private void Awake()
     {
-        mood = CustomerMood.Satisfied;
-        customerPatience = plateRequest.Count * secondsPerIngredient;
-        currentPatience = customerPatience;
-
+        NewSpawn();
     }
-    private void Update()
+    private void Start()
     {
-        currentPatience -= Time.deltaTime*moodMultiplier;
-        patienceRatio();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        customerPatience = plateRequest.Count * secondsPerIngredient;
+        currentPatience = customerPatience;                         
+    }
+    private void LateUpdate()
+    {
+        currentPatience -= Time.deltaTime * moodMultiplier;
+        PatienceRatio();
         if (currentPatience <= 0)
         {
-            if(mood!= CustomerMood.Angry)
-            ChangeMood(CustomerMood.Dissatisfied);//Customer mood changed to dissatisfied
+            if (mood != CustomerMood.Angry)
+                ChangeMood(CustomerMood.Dissatisfied);//Customer mood changed to dissatisfied
+            CheckResult(scoreAddition);
+
         }
     }
     #region Methods
-    public float patienceRatio() 
+    public void NewSpawn() 
+    {
+        
+        customerPatience = plateRequest.Count * secondsPerIngredient;
+        currentPatience = customerPatience;
+    }
+    public float PatienceRatio()
     {
         return currentPatience / customerPatience;
     }
-    public void CheckPlates(VegePlate vegePlate,Player player)
+    public void CheckPlates(VegePlate vegePlate, Player player)
     {
         AddPlayer(player);
         //Part1 Check if vegePlate has the ingredients
-        for(int i = 0; i< plateRequest.Count; i++) 
+        for (int i = 0; i < plateRequest.Count; i++)
         {
             VegetableType vType = plateRequest[i].typeOfVegetable;
             if (vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType))
@@ -57,7 +70,7 @@ public class Customer : MonoBehaviour
         }
 
         //Part2 decides what mood the customer will be in
-        if(correctNumberOfIngredients>= plateRequest.Count) 
+        if (correctNumberOfIngredients >= plateRequest.Count)
         {
             float happinessCheck = currentPatience / customerPatience;
             if (happinessCheck > .70f) // Checks to see if 
@@ -65,56 +78,73 @@ public class Customer : MonoBehaviour
                 Debug.Log("SoHappy");
                 ChangeMood(CustomerMood.Happy);//Customer mood changed to happy//Spawn Powerup
             }
-            else 
+            else
                 ChangeMood(CustomerMood.Satisfied);//Customer mood changed to satisfied
             correctNumberOfIngredients = 0;
             CheckResult(player, scoreAddition);
-            DeactivateCustomer();
         }
-        else 
-        { 
+        else
+        {
             correctNumberOfIngredients = 0;
             ChangeMood(CustomerMood.Angry);//Customer mood changed to angry
-            moodMultiplier=  1.2f;
-            Debug.Log("Wrong"); 
+            //vegePlate.vegetablesOnPlate.Clear();
+            moodMultiplier = 1.2f;
+            Debug.Log("Wrong");
         }
     }
-    public void CheckResult(Player player,int scoreAddition) 
+    public void CheckResult(Player player, int scoreAddition)
     {
-        switch (mood)
+        DeactivateCustomer();
+        if (mood == CustomerMood.Happy)
         {
-            case CustomerMood.Happy:
-                //Spawn Powerup
-                PointDistribution(player, scoreAddition);
-                break;
-            case CustomerMood.Satisfied:
-                PointDistribution(player, scoreAddition);
-                break;
-            case CustomerMood.Angry:
-                PointDistribution(playersWhoInteracted.ToArray(), -(scoreAddition * 2));
-                break;
-            case CustomerMood.Dissatisfied:
-                PointDistribution(GameManager.Instance.player1.GetComponent<Player>(), -scoreAddition);
-                PointDistribution(GameManager.Instance.player2.GetComponent<Player>(), -scoreAddition);
-                break;
-        }
+            //Spawn Powerup
+            Debug.Log("Customer happy");
+            GameManager.Instance.PointDistribution(player, scoreAddition);
 
+        }
+        if (mood == CustomerMood.Satisfied)
+        {
+            GameManager.Instance.PointDistribution(player, scoreAddition);
+            Debug.Log("Customer satis");
+        }
+    }
+    public void CheckResult(int scoreAddition)
+    {
+        DeactivateCustomer();
+        if (mood == CustomerMood.Angry)
+            GameManager.Instance.PointDistribution(playersWhoInteracted.ToArray(), -(scoreAddition * 2));
+        if (mood == CustomerMood.Dissatisfied)
+            GameManager.Instance.PointDistribution(-scoreAddition);
     }
     private void DeactivateCustomer()
     {
-        //this.slider.gameObject.SetActive(false);
+        
+        GetComponent<CustomerUI>().slider.gameObject.SetActive(false);
+        GetComponent<CustomerUI>().text.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
+        CustomerLeave();
     }
-    public void ChangeMood(CustomerMood customerMood) 
+    public void ChangeMood(CustomerMood customerMood)
     {
-        mood = customerMood; 
+        mood = customerMood;
+        if(mood == CustomerMood.Angry) 
+        {
+            spriteRenderer.color = Color.red;
+        }
+        if(mood == CustomerMood.Satisfied) 
+        {
+            spriteRenderer.color = Color.white;
+        }
     }
     public void AddPlayer(Player player)
     {
         if (!playersWhoInteracted.Contains(player))
             playersWhoInteracted.Add(player);
     }
-    public void PointDistribution(Player players, int score) { }
-    public void PointDistribution(Player[] players, int score) { }
+    private void OnDisable()
+    {
+        plateRequest.Clear();
+        ChangeMood(CustomerMood.Satisfied);
+    }
     #endregion
 }
