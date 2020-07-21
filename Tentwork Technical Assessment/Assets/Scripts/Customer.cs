@@ -62,7 +62,7 @@ public class Customer : MonoBehaviour
         for (int i = 0; i < plateRequest.Count; i++)
         {
             VegetableType vType = plateRequest[i].typeOfVegetable;
-            if (vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType))
+            if (vegePlate.vegetablesOnPlate.Contains(plateRequest[i]))//(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType))
             {
                 vegePlate.vegetablesOnPlate.Remove(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType));
                 correctNumberOfIngredients++;
@@ -75,7 +75,6 @@ public class Customer : MonoBehaviour
             float happinessCheck = currentPatience / customerPatience;
             if (happinessCheck > .70f) // Checks to see if 
             {
-                Debug.Log("SoHappy");
                 ChangeMood(CustomerMood.Happy);//Customer mood changed to happy//Spawn Powerup
             }
             else
@@ -89,7 +88,6 @@ public class Customer : MonoBehaviour
             ChangeMood(CustomerMood.Angry);//Customer mood changed to angry
             //vegePlate.vegetablesOnPlate.Clear();
             moodMultiplier = 1.2f;
-            Debug.Log("Wrong");
         }
     }
     public void CheckResult(Player player, int scoreAddition)

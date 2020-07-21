@@ -127,6 +127,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68cd0dedeb49ac419803fea68745af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkableLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  speed: 5
+  up: 0
+  down: 0
+  left: 0
+  right: 0
+  action: 0
 --- !u!114 &5173891962373414101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5e3c219b3986643bafc0a41f22315d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  speed: 5
+  text: {fileID: 0}
   inventory: []
 --- !u!114 &5173891962373414098
 MonoBehaviour:

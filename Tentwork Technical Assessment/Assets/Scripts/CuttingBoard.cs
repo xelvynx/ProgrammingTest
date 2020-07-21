@@ -7,7 +7,7 @@ public class CuttingBoard : MonoBehaviour
     public bool inUse = false;
     private float chopTime;
     public VegePlate vegePlate;
-    public Text veggieText;
+    public Text text;
     public void Start()
     {
         vegePlate = GetComponent<VegePlate>();
@@ -25,10 +25,10 @@ public class CuttingBoard : MonoBehaviour
                     inUse = true;
                     chopTime = player.inventory[0].cuttingDuration;
                     vegePlate.AddToPlate(player.inventory[0]);
-                    AddText();
+                    UIManager.Instance.UpdateText(text, vegePlate.vegetablesOnPlate.ToArray(), vegePlate.vegetablesOnPlate.Count);
                     player.RemoveVegetable();
-                    player.MovementControl();
-                    player.Invoke("MovementControl", chopTime);
+                    player.controls.MovementControl();
+                    player.controls.Invoke("MovementControl", chopTime);
                     Invoke("ReverseInUse", chopTime);
                 }
             }
@@ -38,23 +38,7 @@ public class CuttingBoard : MonoBehaviour
     public void ClearVegePlate()
     {
         vegePlate.vegetablesOnPlate.Clear();
-        veggieText.text = "";
-    }
-    public void AddText()
-    {
-        int i = vegePlate.vegetablesOnPlate.Count;
-        switch (i)
-        {
-            case 1:
-                veggieText.text = vegePlate.vegetablesOnPlate[0].typeOfVegetable.ToString();
-                return;
-            case 2:
-                veggieText.text = vegePlate.vegetablesOnPlate[0].typeOfVegetable.ToString() + ", " + vegePlate.vegetablesOnPlate[1].typeOfVegetable.ToString();
-                return;
-            case 3:
-                veggieText.text = vegePlate.vegetablesOnPlate[0].typeOfVegetable.ToString() + ", " + vegePlate.vegetablesOnPlate[1].typeOfVegetable.ToString() + ", " + vegePlate.vegetablesOnPlate[2].typeOfVegetable.ToString();
-                return;
-        }
+        UIManager.Instance.UpdateText(text, null, 0);
     }
 
 }
