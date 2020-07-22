@@ -13,7 +13,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         get { return instance != null; }
     }
-
+    #region Unity Methods
     protected virtual void Awake()
     {
         if (Instance != null)
@@ -32,4 +32,5 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             instance = null;
         }
     }
+    #endregion
 }

@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class HighScoreUI : MonoBehaviour
 {
-    public Text positionText;
+    #region Variables
+public Text positionText;
     public Text scoreText;
     public Text playerNameText;
 
+    #endregion
+    
     public void UpdateHighScore(HighscoreEntry hsEntry, int position)
     {
         Debug.Log("updating high score");

@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class CustomerUI : MonoBehaviour
 {
+    #region Variables
     private Customer customer;
     public Slider slider;
     public Text text;
+    #endregion
+    #region Unity Methods
     public void Awake()
     {
         customer = GetComponent<Customer>();
@@ -23,6 +26,8 @@ public class CustomerUI : MonoBehaviour
     {
         slider.value = customer.PatienceRatio();
     }
+    #endregion
+    #region Methods
     public void AddText(int i)
     {
         switch (i)
@@ -40,4 +45,5 @@ public class CustomerUI : MonoBehaviour
                 break;
         }
     }
+    #endregion
 }

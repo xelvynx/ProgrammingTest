@@ -5,22 +5,36 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class UIManager : Singleton<UIManager>
 {
+    #region Fields
     public Text player1ScoreText;
     public Text player1TimerText;
     public Text player2ScoreText;
     public Text player2TimerText;
+    public Text winningPlayer;
 
     public GameObject endGameScreen;
     public HighScoreUI[] highScoreObjects;
     public HighScoreList highScoreList;
-    //Need score screen, retry button
-
+    #endregion
+    #region Unity Methods
     public void Start()
     {
         GameManager.GameIsOver += EndGame;
     }
+    #endregion
+    #region Methods
     public void EndGame(Player player) 
     {
+        Debug.Log("Part2");
+        StartCoroutine(DisplayEndGameScreen(player));
+    }
+    public IEnumerator DisplayEndGameScreen(Player player) 
+    {
+        winningPlayer.gameObject.SetActive(true);
+        winningPlayer.text = player.name + " Wins";
+        yield return new WaitForSeconds(2);
+        Debug.Log("Part3");
+        winningPlayer.gameObject.SetActive(false);
         endGameScreen.SetActive(true);
         highScoreList.AddTolist(player);//Sets highscore
         SetHighScores();
@@ -77,5 +91,5 @@ public class UIManager : Singleton<UIManager>
     {
         Application.Quit();
     }
-
+    #endregion
 }

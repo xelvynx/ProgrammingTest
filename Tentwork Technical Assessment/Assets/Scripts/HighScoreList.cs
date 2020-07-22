@@ -4,10 +4,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Highscore List", menuName = "Highscore List")]
 public class HighScoreList : ScriptableObject
 {
+    #region Variables
     public List<HighscoreEntry> highScoreEntries;
     public int highScoreMax = 10;
     private HighscoreEntry temporary;
-
+    #endregion
+    #region Methods
     public void AddTolist(Player player)
     {
         temporary = new HighscoreEntry(player.name, player.Score);
@@ -23,4 +25,5 @@ public class HighScoreList : ScriptableObject
             highScoreEntries.RemoveRange(10, highScoreEntries.Count - highScoreMax);
         }
     }
+    #endregion
 }

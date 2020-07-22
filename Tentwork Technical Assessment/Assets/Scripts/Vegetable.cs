@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Vegetable : MonoBehaviour
 {
+    #region Variables
     public float cuttingDuration { get; private set; }
     public VegetableType typeOfVegetable;
     public Text nameText;
+    #endregion
+    #region Unity Method
     void Start()
     {
         ChangeVegetable();
     }
-
+    #endregion
+    #region Methods
     public void GetVegetable(Vegetable vege) 
     {
         typeOfVegetable = vege.typeOfVegetable;
@@ -51,6 +55,6 @@ public class Vegetable : MonoBehaviour
             default:
                 break;
         }
-
     }
+    #endregion
 }

@@ -9,19 +9,18 @@ public class Customer : MonoBehaviour
     public List<Vegetable> plateRequest = new List<Vegetable>();
     public List<Player> playersWhoInteracted = new List<Player>();
     public CustomerMood mood;
-    private float secondsPerIngredient = 100;
+    private float secondsPerIngredient = 45;
     private float customerPatience;
     public float currentPatience;
-    private int scoreAddition = 100;
+    private int scoreBonus
+    {
+        get { return 100 * plateRequest.Count; }
+    }
     public int correctNumberOfIngredients;
     private float moodMultiplier = 1;
-
     private SpriteRenderer spriteRenderer;
-    //Dissatisfied Customer waits until currentPatience hits 0.  When 0 hits, both players will lose points
-    //Angry Customer - comes from being given incorrect orders. will lose patience a bit faster, person or people who provided incorrect order will lose double points
-    //Happy customer - given dish with 70% remaining. Awards player with powerup bonus
-
     #endregion
+    #region Unity Methods
     private void Awake()
     {
         NewSpawn();
@@ -40,14 +39,19 @@ public class Customer : MonoBehaviour
         {
             if (mood != CustomerMood.Angry)
                 ChangeMood(CustomerMood.Dissatisfied);//Customer mood changed to dissatisfied
-            CheckResult(scoreAddition);
+            CheckResult(scoreBonus);
 
         }
     }
+    #endregion
     #region Methods
+    public void AddPlayer(Player player)
+    {
+        if (!playersWhoInteracted.Contains(player))
+            playersWhoInteracted.Add(player);
+    }
     public void NewSpawn() 
     {
-        
         customerPatience = plateRequest.Count * secondsPerIngredient;
         currentPatience = customerPatience;
     }
@@ -58,68 +62,79 @@ public class Customer : MonoBehaviour
     public void CheckPlates(VegePlate vegePlate, Player player)
     {
         AddPlayer(player);
-        //Part1 Check if vegePlate has the ingredients
-        for (int i = 0; i < plateRequest.Count; i++)
+        if (vegePlate.vegetablesOnPlate.Count == plateRequest.Count)
         {
-            VegetableType vType = plateRequest[i].typeOfVegetable;
-            if (vegePlate.vegetablesOnPlate.Contains(plateRequest[i]))//(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType))
+            //Part1 Check if vegePlate has the ingredients
+            for (int i = 0; i < plateRequest.Count; i++)
             {
-                vegePlate.vegetablesOnPlate.Remove(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType));
-                correctNumberOfIngredients++;
+                VegetableType vType = plateRequest[i].typeOfVegetable;
+                if (vegePlate.vegetablesOnPlate.Contains(plateRequest[i]))//(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType))
+                {
+                    vegePlate.vegetablesOnPlate.Remove(vegePlate.vegetablesOnPlate.Find(s => s.typeOfVegetable == vType));
+                    correctNumberOfIngredients++;
+                }
             }
-        }
-
-        //Part2 decides what mood the customer will be in
-        if (correctNumberOfIngredients >= plateRequest.Count)
-        {
-            float happinessCheck = currentPatience / customerPatience;
-            if (happinessCheck > .70f) // Checks to see if 
+            //Part2 decides what mood the customer will be in
+            if (correctNumberOfIngredients == plateRequest.Count)
             {
-                ChangeMood(CustomerMood.Happy);//Customer mood changed to happy//Spawn Powerup
+                float happinessCheck = currentPatience / customerPatience;
+                if (happinessCheck > .70f)
+                    ChangeMood(CustomerMood.Happy);
+                else
+                    ChangeMood(CustomerMood.Satisfied);
+                correctNumberOfIngredients = 0;
+                CheckResult(player, scoreBonus);
             }
             else
-                ChangeMood(CustomerMood.Satisfied);//Customer mood changed to satisfied
-            correctNumberOfIngredients = 0;
-            CheckResult(player, scoreAddition);
+            {
+                IncorrectOrder();
+            }
         }
         else
         {
-            correctNumberOfIngredients = 0;
-            ChangeMood(CustomerMood.Angry);//Customer mood changed to angry
-            //vegePlate.vegetablesOnPlate.Clear();
-            moodMultiplier = 1.2f;
+            IncorrectOrder();
         }
     }
+
+    private void IncorrectOrder()
+    {
+        correctNumberOfIngredients = 0;
+        ChangeMood(CustomerMood.Angry);
+        moodMultiplier = 3;
+    }
+
     public void CheckResult(Player player, int scoreAddition)
     {
-        DeactivateCustomer();
         if (mood == CustomerMood.Happy)
         {
             //Spawn Powerup
-            Debug.Log("Customer happy");
+            PowerupManager.Instance.RequestPowerup(player.gameObject.name);
             GameManager.Instance.PointDistribution(player, scoreAddition);
 
         }
         if (mood == CustomerMood.Satisfied)
         {
             GameManager.Instance.PointDistribution(player, scoreAddition);
-            Debug.Log("Customer satis");
         }
+        DeactivateCustomer();
     }
     public void CheckResult(int scoreAddition)
     {
-        DeactivateCustomer();
+
         if (mood == CustomerMood.Angry)
             GameManager.Instance.PointDistribution(playersWhoInteracted.ToArray(), -(scoreAddition * 2));
         if (mood == CustomerMood.Dissatisfied)
             GameManager.Instance.PointDistribution(-scoreAddition);
+        DeactivateCustomer();
     }
     private void DeactivateCustomer()
     {
-        
+        moodMultiplier = 1;
         GetComponent<CustomerUI>().slider.gameObject.SetActive(false);
         GetComponent<CustomerUI>().text.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
+        plateRequest.Clear();
+        ChangeMood(CustomerMood.Satisfied);
         CustomerLeave();
     }
     public void ChangeMood(CustomerMood customerMood)
@@ -134,15 +149,6 @@ public class Customer : MonoBehaviour
             spriteRenderer.color = Color.white;
         }
     }
-    public void AddPlayer(Player player)
-    {
-        if (!playersWhoInteracted.Contains(player))
-            playersWhoInteracted.Add(player);
-    }
-    private void OnDisable()
-    {
-        plateRequest.Clear();
-        ChangeMood(CustomerMood.Satisfied);
-    }
+    
     #endregion
 }
