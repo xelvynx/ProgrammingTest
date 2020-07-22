@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     public static event GameOver GameIsOver;
     public GameObject player1GO;
     public GameObject player2GO;
-    private float startingTime = 5;
+    public float startingTime = 60;
     private float player1Time;
     private float player2Time;
     private int player1Score;
